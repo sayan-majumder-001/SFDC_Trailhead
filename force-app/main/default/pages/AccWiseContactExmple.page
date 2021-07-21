@@ -1,0 +1,65 @@
+<apex:page controller="AccWiseConCls">
+    
+   
+   <apex:form >
+       <apex:pageBlock >
+       <apex:outputPanel >
+            <apex:outputText style="font-weight:bold; padding:5px"> Account Name: </apex:outputText>
+            <apex:selectList value="{!accountID}" multiselect="false" size="1" onchange="changeAccount()">
+                <apex:selectOptions value="{!AccItems}"></apex:selectOptions>
+            </apex:selectList>
+        </apex:outputPanel>
+       <br/>
+       <br/>
+        <apex:outputPanel id="contactPanal" style="text-align:left;">
+            <apex:outputPanel style="float:left;">
+                <apex:outputLabel > Count: </apex:outputLabel>
+                <apex:outputText value="{!ToatalCon}"></apex:outputText>
+            </apex:outputPanel>
+           <apex:variable var="count" value="{!0}" />
+            <apex:pageBlockTable title="Contact List" value="{!ConList}" var="con">
+                <apex:column headerValue="First Name" value="{!con.FirstName}"/>
+                <apex:column headerValue="Last Name" value="{!con.LastName}"/>
+                <apex:column headerValue="Birth date" value="{!con.Birthdate}"/>
+                <apex:column headerValue="Email" value="{!con.Email}"/>
+                <apex:column headerValue="City" value="{!con.MailingCity}"/>
+                <apex:column headerValue="State" value="{!con.MailingState}"/>
+                <apex:column headerValue="Country" value="{!con.MailingCountry}"/>
+                <apex:column headerValue="Postal Code" value="{!con.MailingPostalCode}"/>
+                <apex:column headerValue="Action"> 
+                    <apex:commandButton value="Edit" onclick="callFunction1({!count})" reRender="editPanel" /> | 
+                    <apex:commandButton value="Delete" /> 
+                    <apex:variable var="count" value="{!count+1}" /> 
+                </apex:column>
+            </apex:pageBlockTable>
+             <apex:actionFunction name="callFunction1" action="{!editContactDetails}" reRender="editPanel">
+                  <apex:param name="firstParam" assignTo="{!index}" value=""/>
+			</apex:actionFunction>
+        </apex:outputPanel>
+           <apex:outputPanel id="editPanel" >
+               <apex:outputPanel rendered="{!displayEditPanel}">
+                   Edit panel
+                   <apex:outputText >First Name: </apex:outputText> <apex:inputField value="{!con.FirstName}" />
+                   <br/>
+                   <apex:outputText >Last Name: </apex:outputText> <apex:inputField value="{!con.LastName}" />
+                   <br/>
+                   <apex:outputText >Birth date: </apex:outputText> <apex:inputField value="{!con.Birthdate}" />
+                   <br/>
+                   <apex:outputText >Email: </apex:outputText> <apex:inputField value="{!con.Email}" />
+                   <br/>
+                   <apex:outputText >City: </apex:outputText> <apex:inputField value="{!con.MailingCity}" />
+                   <br/>
+                   <apex:outputText >State: </apex:outputText> <apex:inputField value="{!con.MailingState}" />
+                   <br/>
+                   <apex:outputText >Country: </apex:outputText> <apex:inputField value="{!con.MailingCountry}" />
+                   <br/>
+                   <apex:outputText >Postal Code: </apex:outputText> <apex:inputField value="{!con.MailingPostalCode}" />
+                   <br/>
+                 <apex:commandButton value="Close" action="{!CloseEditPanel}" reRender="editPanel"/>   
+               </apex:outputPanel>
+           </apex:outputPanel>   
+       <apex:actionFunction name="changeAccount" action="{!selectAccount}" reRender="contactPanal"/>
+       </apex:pageBlock>
+       
+   </apex:form> 
+</apex:page>

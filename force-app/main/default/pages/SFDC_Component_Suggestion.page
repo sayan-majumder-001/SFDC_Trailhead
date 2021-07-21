@@ -1,0 +1,34 @@
+<apex:page controller="SFDC_ComponentSuggestionUtil" docType="html-5.0">
+<apex:form > 
+<apex:pageBlock title="Search Component">
+ <label class="slds-form-element__label" for="text-input-id-1">Component Type</label>
+     <div class="slds-form-element__control">
+ <apex:selectList size="1" value="{!compType}" styleClass="slds-select slds-input slds-input--small" style="width:100%;">
+ <apex:selectOptions value="{!ComponentType}"/>
+ </apex:selectList>
+    </div>
+    <apex:inputText value="{!searchstring}" label="Input" id="searchComponentString"/> 
+    <apex:commandButton value="Search records" action="{!compImpl}"/>
+<apex:commandButton value="Clear records" action="{!clear}"/>  
+    <!--onchange="hideSection('{!flagVF}')"-->
+    <apex:pageblockTable value="{!searchstring}" var="showHead">   
+        <apex:column headerValue="Search Results"/>
+    </apex:pageblockTable>
+    <apex:pageblockTable value="{!compListVF}" var="cVF" id="pgVF" rendered="{!if(compType=='VFP',true,false)}"> 
+<apex:column >
+    <apex:outputLink id="outputLVF" value="/{!cVF.Id}" target="_blank">{!cVF.name}</apex:outputLink>
+</apex:column>
+</apex:pageBlockTable> 
+<apex:pageblockTable value="{!compListAPX}" var="cAPX" id="pgAPX" rendered="{!if(compType=='APXC',true,false)}"> 
+<apex:column >
+    <apex:outputLink id="outputLApx" value="/{!cAPX.Id}" target="_blank">{!cAPX.name}</apex:outputLink>
+</apex:column>
+</apex:pageBlockTable>     
+<apex:pageblockTable value="{!compListAPXT}" var="cAPXT" id="pgAPXT" rendered="{!if(compType=='APXT',true,false)}"> 
+<apex:column >
+    <apex:outputLink id="outputLApxT" value="/{!cAPXT.Id}" target="_blank">{!cAPXT.name}</apex:outputLink>
+</apex:column>
+</apex:pageBlockTable>    
+</apex:pageBlock> 
+</apex:form> 
+</apex:page>

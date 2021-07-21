@@ -1,0 +1,13 @@
+<apex:page controller="ApextoApexNavigationController">
+<apex:form >
+<apex:pageBlock >
+ 
+<apex:pageBlockButtons location="Top">
+<apex:commandButton action="/apex/Custom_Links" value="Navigate to Custom Links"/>
+<apex:commandButton action="{!step2}" value="Navigate to page Y"/>
+</apex:pageBlockButtons>
+ 
+</apex:pageBlock>
+ 
+</apex:form>
+</apex:page>

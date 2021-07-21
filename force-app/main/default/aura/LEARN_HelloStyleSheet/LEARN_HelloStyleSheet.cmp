@@ -1,0 +1,8 @@
+<aura:component >
+    <h1>This is to demonstrate Styles (CSS) in lightening</h1>
+    <div class="red">This will be red</div>
+    <div class="green">This will be green</div>
+    <div class="blue">This will be blue</div>
+    <ltng:require styles="{!$Resource.bootstrap}" />
+    <div class="myBootstrap">External CSS</div>
+</aura:component>

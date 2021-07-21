@@ -1,0 +1,17 @@
+<apex:page sidebar="true" showheader="true" id="p1">
+    <script>
+        function sum(){
+            alert('hello');
+            var a=parseInt(document.getElementById('p1:f1:n1').value);
+            alert(a);
+            var b=parseInt(document.getElementById('p1:f1:n2').value);
+            alert(b);
+            alert('Total value is '+(a+b));
+        }
+    </script>
+  <apex:form id="f1">
+     First Number: <apex:inputtext id="n1"/><br/>
+      Second Number: <apex:inputtext id="n2"/><br/>
+      <apex:commandButton value="Sum" onclick="sum()"/>
+  </apex:form>
+</apex:page>

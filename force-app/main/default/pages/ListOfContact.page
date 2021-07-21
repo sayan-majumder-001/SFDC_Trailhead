@@ -1,0 +1,31 @@
+<apex:page standardController="Account" extensions="ViewContactCls" docType="html-5.0">
+    <head>
+       <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script>
+            var app = angular.module('myApp', []);
+            app.controller('myCtrl', function($scope) {
+                // alert('call');
+                $scope.cont = {!conJsonStr};
+            });
+        </script>
+    </head>
+    <body ng-app="myApp" ng-controller="myCtrl">
+		<h1>Contact List</h1>
+        <table class="table table-bordered">
+     <tr>
+       <th>Id</th>
+       <th>Name</th>
+       <th>Email</th>
+       <th>BirthDate</th>
+     </tr>
+     <tr ng-repeat="contact in cont"> 
+	   <td>{{contact.Id}}</td>         
+       <td>{{contact.Name}}</td>
+       <td>{{contact.Email}}</td>
+       <td>{{contact.BirthDate}}</td>
+     </tr>
+   </table>
+    </body>
+</apex:page>

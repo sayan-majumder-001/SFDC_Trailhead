@@ -1,0 +1,4 @@
+<apex:page controller="Date_formatCls">
+   Date:   <apex:outputText value="{!formatteddata}"></apex:outputText>
+    
+</apex:page>

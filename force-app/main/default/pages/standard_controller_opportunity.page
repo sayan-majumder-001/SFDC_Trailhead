@@ -1,0 +1,25 @@
+<apex:page standardController="Opportunity">
+<apex:form >
+    <apex:pageBlock >
+       <apex:PageBlockSection title="View Detail">
+        <apex:inputField value="{!Opportunity.Name}" />
+        <apex:inputField value="{!Opportunity.Amount}" />
+        </apex:PageBlockSection>
+        <Center>
+        <apex:pageBlockButtons location="Bottom">
+        <apex:commandButton value="Save Rocord" action="{!Save}"/><Br/>
+        <apex:commandButton value="Save Now " action="{!QuickSave}"/><Br/>
+        <apex:commandLink value="Save Link" action="{!Save}"/><Br/>
+         <apex:commandLink value="Save Link Quick" action="{!QuickSave}"/>
+        </apex:pageBlockButtons>
+        </Center>
+        
+       
+        <apex:PageBlockSection title="Data afer update" >
+        <apex:OutputField value="{!Opportunity.Name}"/> 
+        <apex:OutputField value="{!Opportunity.Amount}" />
+        <apex:inlineEditSupport />
+        </apex:PageBlockSection>
+    </apex:pageBlock>
+  </apex:form>
+  </apex:page>

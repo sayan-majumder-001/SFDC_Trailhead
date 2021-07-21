@@ -1,0 +1,12 @@
+<apex:page controller="CustomLinksConsoleHomeController"  >
+<apex:form >
+ <apex:pageBlock title="Custom Links" id="links"> 
+ <html>
+ <a href="{!Advanced_Markets_Value}" target="_blank">{!Advanced_Markets_Name}</a>
+ <br/>
+ <a href="{!CANNEX_Illustrations_Value}" target="_blank">{!CANNEX_Illustrations_Name}</a>
+ <br/>
+ </html>   
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>

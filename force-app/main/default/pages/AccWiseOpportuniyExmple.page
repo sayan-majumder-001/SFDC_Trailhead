@@ -1,0 +1,25 @@
+<apex:page controller="AccWiseOpporCls">
+   <apex:form >
+       <apex:pageBlock >
+       <apex:outputPanel >
+            <apex:outputText style="font-weight:bold; padding:5px"> Account Name: </apex:outputText>
+            <apex:selectList value="{!accountID}" multiselect="false" size="1" onchange="changeAccount()">
+                <apex:selectOptions value="{!AcctItems}"></apex:selectOptions>
+            </apex:selectList>
+        </apex:outputPanel>
+       <br/>
+       <br/>
+        <apex:outputPanel id="opporPanel" style="text-align:left;">
+            <apex:outputPanel style="float:left;">
+                <apex:outputLabel > Count: </apex:outputLabel>
+                <apex:outputText value="{!totalCountOppor}"></apex:outputText>
+            </apex:outputPanel>
+            <apex:pageBlockTable title="Opportunity List" value="{!opporList}" var="oppo">
+                <apex:column headerValue="Name" value="{!oppo.Name}"/>
+                <apex:column headerValue="Expected Revenue" value="{!oppo.ExpectedRevenue}"/>
+            </apex:pageBlockTable>
+        </apex:outputPanel>
+       <apex:actionFunction name="changeAccount" action="{!displayOpportunity}" reRender="opporPanel"/>
+       </apex:pageBlock>
+   </apex:form> 
+</apex:page>

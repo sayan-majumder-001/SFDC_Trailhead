@@ -1,0 +1,13 @@
+<apex:page showHeader="true" sidebar="true" standardController="Hotel__c" extensions="GetHotelDetailsController" renderas="pdf">
+ <apex:pageBlock >
+      <apex:pageBlockTable title="Hotel Details Booked" value="{!hotelData}" var="hot">
+                <apex:column headerValue="City" value="{!hot.City__c}"/>
+                <apex:column headerValue="Description" value="{!hot.Description__c}"/>
+                <apex:column headerValue="Location" value="{!hot.Location__c}"/>
+                <apex:column headerValue="Travel Agent" value="{!hot.Travel_Agent__c}"/>
+                <apex:column headerValue="No. of Rooms" value="{!hot.Number_of_Rooms__c}"/>
+                <apex:column headerValue="Rating" value="{!hot.Rating__c}"/>
+                <apex:column headerValue="Total Booking Price" value="{!hot.Total_booking_Price__c}"/>
+</apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>
