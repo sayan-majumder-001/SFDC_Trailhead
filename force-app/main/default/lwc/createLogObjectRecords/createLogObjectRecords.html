@@ -1,0 +1,19 @@
+<template>
+  <lightning-button variant="brand" label="Create Test Log" title="Create Test Log" data-id={recordId}
+    onclick={handleClick} class="slds-var-m-left_x-small"></lightning-button>
+  <div if:true={logRecords} class="slds-m-around_medium">
+    <p style="font-weight:bold;" class="slds-m-bottom_small">Log results</p>
+    <template if:true={logRecords}>
+      <template for:each={logRecords} for:item="log">
+        <p key={log.Id}>Service Call start Time: {log.ServiceCalledStarted__c}</p>
+        <p key={log.Id}>Service Call End Time: {log.ServiceCallEnded__c}</p>
+        <p key={log.Id}>Trigger Call End Time: {log.TriggerCallEnded__c}</p>
+        <p key={log.Id}>Workflow End Time: {log.workflowEnded__c}</p>
+      </template>
+      <a href={sfdcBaseURL}>Salesforce Log Record link</a>
+    </template>
+    <template if:true={error}>
+      <p>Error has Occured</p>
+    </template>
+  </div>
+</template>
