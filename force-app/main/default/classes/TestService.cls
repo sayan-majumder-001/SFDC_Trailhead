@@ -9,7 +9,7 @@ global with sharing class TestService
         RestRequest req = RestContext.request;
         RestResponse res = Restcontext.response;
         Id testObjId = req.requestURI.substring(req.requestURI.lastIndexOf('/')+1);
-        TestLogObject__c test = new TestLogObject__c (ServiceCalledStarted__c = startDT, account__c = testObjId);
+        TestLogObject__c test = new TestLogObject__c (ServiceCalledStarted__c = startDT, account__c = testObjId, status__c = 'Closed');
         insert test;
         TestLogObject__c test1 = new TestLogObject__c();
         test1.Id = test.Id;
