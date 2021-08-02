@@ -10,6 +10,7 @@ export default class CreateLogObjectRecords extends LightningElement {
   @api recordId;
   @track logRecords;
   @track error;
+  noLog = false;
 
   connectedCallback() {
   }
@@ -19,12 +20,16 @@ export default class CreateLogObjectRecords extends LightningElement {
     let logsfdcId = null;
     callTestServiceMethod({ AccountId: recordVal })
       .then(data => {
+        console.log('data::::'+data);
         data.forEach(function (logval) {
           logsfdcId = logval.Id;
         });
         this.logRecords = data;
         this.logSFDCId = logsfdcId;
         this.error = null;
+        if(this.logRecords === null){
+          this.noLog = true;
+        }
       })
       .catch(error => {
         this.logRecords = null;

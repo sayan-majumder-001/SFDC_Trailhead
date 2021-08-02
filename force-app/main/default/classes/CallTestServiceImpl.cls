@@ -1,7 +1,34 @@
 public with sharing class CallTestServiceImpl {
-    @AuraEnabled(cacheable = true)
+    @AuraEnabled(cacheable=false)
     public static List<TestLogObject__c> callTestServiceMethod(String AccountId) {
+        if([select Id,doCallout__c from Account where Id = :AccountId].doCallout__c){
         //Make sure your Salesforce instance URL is added in remote site settings
+        //introduce delay 3 callouts start
+         //CALLOUT 1 - Agify
+         String endpoint ='https://api.agify.io?name=Sayan';
+         HTTP h = new HTTP();
+         HTTPRequest req = new HTTPRequest();
+         req.setEndPoint(endpoint);
+         req.setMethod('GET');
+         HTTPResponse res = h.send(req);
+         Map<String, Object> mapAgePredict = (Map<String, Object>) JSON.deserializeUntyped(res.getBody());
+         //CALLOUT 2
+         String endpoint1 ='https://api.genderize.io?name='+(String)mapAgePredict.get('name');
+         HTTP h1 = new HTTP();
+         HTTPRequest req1 = new HTTPRequest();
+         req1.setEndPoint(endpoint1);
+         req1.setMethod('GET');
+         HTTPResponse res1 = h1.send(req1);
+         Map<String, Object> mapAgePredict1 = (Map<String, Object>) JSON.deserializeUntyped(res1.getBody());
+         //CALLOUT 3
+         String endpoint2 ='https://api.nationalize.io?name='+(String)mapAgePredict1.get('name');
+         HTTP h2 = new HTTP();
+         HTTPRequest req2 = new HTTPRequest();
+         req2.setEndPoint(endpoint2);
+         req2.setMethod('GET');
+         HTTPResponse res2 = h2.send(req2);
+         Map<String, Object> mapAgePredict2 = (Map<String, Object>) JSON.deserializeUntyped(res2.getBody());
+         //introduce delay 3 callouts end
         List<TestLogObject__c> lstFinal = new List<TestLogObject__c>();
         String sfdcURL = URL.getSalesforceBaseUrl().toExternalForm();
         String soql = 'select Id,generated_token__c from Token_Information__mdt where masterlabel = \'Test Service\'';
@@ -31,5 +58,10 @@ public with sharing class CallTestServiceImpl {
             throw e;
         }
         return lstFinal;
+    }else{
+        TestLogObject__c test = new TestLogObject__c (ServiceCalledStarted__c = System.now(), account__c = AccountId, status__c = 'Open');
+        insert test;
+         return null;
     }
+ }
 }
